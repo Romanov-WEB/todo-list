@@ -1,7 +1,14 @@
 <div class="container">
   <h1 class="header">{{title}}</h1>
-  <app-post-form></app-post-form>
-  <app-post></app-post>
+  <app-post-form
+    (onAdd)="updatePost($event)"
+    [onIndex]="post"
+  ></app-post-form>
+  <app-post
+    *ngFor="let item of post"
+    [myPost]="item"
+    (onDelete)="deletePost($event)"
+  ></app-post>
 </div>
 
 
