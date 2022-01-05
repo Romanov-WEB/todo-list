@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Post} from "../app.component";
 
 @Component({
   selector: 'app-post',
@@ -6,10 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./post.component.css']
 })
 export class PostComponent implements OnInit {
+  @Input('myPost') post!: Post;
+  @Output() onDelete:EventEmitter<number> = new EventEmitter()
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor() {
   }
-
+  ngOnInit(){
+  }
+  delete(id: number | undefined){
+    this.onDelete.emit(id)
+  }
 }
