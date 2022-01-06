@@ -4,6 +4,7 @@ export interface Post {
   title: string,
   description: string,
   id: any
+  date: Date
 }
 
 @Component({
@@ -14,9 +15,10 @@ export interface Post {
 export class AppComponent {
   title = 'Todo list Angular!';
   post: Post[] = [
-    {title: 'Выучить Angular', description: 'За 2 недели пройти курс.', id: 1},
-    {title: 'Что лучше аргуляр или реакт?', description: 'Жираф большой ему видней', id: 2}
+    {title: 'Выучить Angular', description: 'За 2 недели пройти курс.', id: 1, date: new Date('2021-04-22T13:34:50.417-07:00')},
+    {title: 'Что лучше аргуляр или реакт?', description: 'Жираф большой ему видней', id: 2, date: new Date('2021-01-26T13:51:50.417-07:00')}
   ]
+
   updatePost(post: Post){
     this.post.unshift(post)
   }

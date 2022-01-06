@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {Post} from "../app.component";
 
 @Component({
@@ -10,12 +10,17 @@ import {Post} from "../app.component";
 export class PostFormComponent implements OnInit {
   @Input() onIndex!: Post[]
   @Output() onAdd: EventEmitter<Post> = new EventEmitter<Post>()
+  @ViewChild('titleInput') titleInput!: ElementRef
   title = ''
   description = ''
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  focus() {
+    this.titleInput.nativeElement.focus()
   }
 
   onAddPost () {
@@ -38,13 +43,12 @@ export class PostFormComponent implements OnInit {
     if (this.title.trim() && this.description.trim()){
       this.onIndex.forEach(item => arrId.push(item.id))
       randomIndex(arrId, index)
-      console.log(index)
       const post: Post = {
         title: this.title,
         description: this.description,
-        id: index
+        id: index,
+        date: new Date()
       }
-      console.log(this.onIndex)
       this.onAdd.emit(post)
       this.title = ''
       this.description = ''
