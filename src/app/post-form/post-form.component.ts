@@ -1,5 +1,7 @@
 import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {Post} from "../app.component";
+import { v4 as uuidv4 } from 'uuid';
+
 
 @Component({
   selector: 'app-post-form',
@@ -13,6 +15,7 @@ export class PostFormComponent implements OnInit {
   @ViewChild('titleInput') titleInput!: ElementRef
   title = ''
   description = ''
+  index = 0
 
   constructor() { }
 
@@ -24,29 +27,12 @@ export class PostFormComponent implements OnInit {
   }
 
   onAddPost () {
-    const arrId: number[] = []
-    let index: number = Math.floor(Math.random()* arrId.length+1)
-
-    function randomIndex (arr: number[], i: number){
-      let max: number =  Math.max.apply(null, arrId)
-      const lengthArr: number = arrId.length + 1
-      max = (max === lengthArr)? max = max + 1: max = lengthArr
-      arrId.forEach(item => {
-        if (item === i) {
-          index = Math.floor(Math.random() * max)
-          return  randomIndex(arrId, index)
-        }
-        return index
-      })
-    }
-
+    console.log()
     if (this.title.trim() && this.description.trim()){
-      this.onIndex.forEach(item => arrId.push(item.id))
-      randomIndex(arrId, index)
       const post: Post = {
         title: this.title,
         description: this.description,
-        id: index,
+        id: uuidv4(),
         date: new Date()
       }
       this.onAdd.emit(post)

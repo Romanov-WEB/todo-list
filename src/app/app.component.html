@@ -7,7 +7,7 @@
   <app-post
     *ngFor="let item of post"
     [myPost]="item"
-    (onDelete)="deletePost($event)"
+    (onDelete)="deletePost(item)"
   >
     <div #info>
       <small *ngIf="item.description.length> 10; else short">Пост длинный</small>

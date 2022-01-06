@@ -28,6 +28,7 @@ export class PostComponent implements OnInit {
     console.log(this.infoEl.nativeElement)
   }
   delete(id: number | undefined){
+    console.log(id)
     this.onDelete.emit(id)
   }
 }
